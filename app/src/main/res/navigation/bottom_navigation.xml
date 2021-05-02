@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/dayPrediction">
+
+    <fragment
+        android:id="@+id/diceRoll"
+        android:name="com.hera.fate.ui.fragments.DiceRoll"
+        android:label="fragment_dice_roll"
+        tools:layout="@layout/fragment_dice_roll" />
+    <fragment
+        android:id="@+id/coinFlip"
+        android:name="com.hera.fate.ui.fragments.CoinFlip"
+        android:label="fragment_coin_flip"
+        tools:layout="@layout/fragment_coin_flip" />
+    <fragment
+        android:id="@+id/dayPrediction"
+        android:name="com.hera.fate.ui.fragments.DayPrediction"
+        android:label="fragment_day_prediction"
+        tools:layout="@layout/fragment_day_prediction" />
+</navigation>
