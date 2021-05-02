@@ -21,7 +21,7 @@ class DiceRoll : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-        // Defining binding.
+        // Defining binding.  
         _binding = FragmentDiceRollBinding.inflate(inflater, container, false)
 
         // Setting action bar title.
@@ -61,7 +61,6 @@ class DiceRoll : Fragment() {
         outState.run {
             putInt(DICE_IMAGE, result ?: 0)
         }
-
         super.onSaveInstanceState(outState)
     }
 
