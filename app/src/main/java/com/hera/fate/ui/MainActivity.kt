@@ -7,15 +7,23 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hera.fate.R
+import com.hera.fate.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // Defining binding.
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Setting up Toolbar.
+        setSupportActionBar(binding.toolbar)
 
         // Setting up Bottom Navigation.
         val fragment: FragmentContainerView = findViewById(R.id.fragment)
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigation.setupWithNavController(fragment.findNavController())
+        binding.bottomNavigation.setupWithNavController(fragment.findNavController())
     }
 }

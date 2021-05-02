@@ -5,56 +5,78 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.hera.fate.R
+import com.hera.fate.databinding.FragmentDiceRollBinding
+import com.hera.fate.utils.ImageCollection.diceImages
+import kotlin.random.Random
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DiceRoll.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiceRoll : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentDiceRollBinding? = null
+    private val binding get() = _binding!!
+    private var result: Int? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+
+        // Defining binding.
+        _binding = FragmentDiceRollBinding.inflate(inflater, container, false)
+
+        // Setting action bar title.
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.dice_roll_title)
+
+        // Getting data from bundle.
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                result = getInt(DICE_IMAGE)
+                if (result == 0)
+                    result = null
+            }
         }
+
+        // Load animations.
+        val fadeIn = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
+
+        // Change dice image when user clicks.
+        binding.diceImage.setOnClickListener {
+            if (binding.rollDiceHint.visibility == View.VISIBLE)
+                binding.rollDiceHint.visibility = View.GONE
+            result = diceImages[Random.nextInt(diceImages.size)]
+            loadDiceImage()
+            binding.diceImage.startAnimation(fadeIn)
+        }
+
+        if (result != null) {
+            binding.rollDiceHint.visibility = View.GONE
+            loadDiceImage()
+            binding.diceImage.startAnimation(fadeIn)
+        }
+
+        return binding.root
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dice_roll, container, false)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.run {
+            putInt(DICE_IMAGE, result ?: 0)
+        }
+
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun loadDiceImage() {
+        Glide.with(binding.root)
+            .load(result)
+            .into(binding.diceImage)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DiceRoll.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DiceRoll().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        const val DICE_IMAGE = "dice_image"
     }
 }
