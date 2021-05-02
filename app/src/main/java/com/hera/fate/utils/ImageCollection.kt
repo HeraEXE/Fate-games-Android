@@ -14,4 +14,9 @@ object ImageCollection {
             R.drawable.face_calm, R.drawable.face_happy,
             R.drawable.face_fear, R.drawable.face_sad
     )
+
+    val coinImages = listOf(
+            R.drawable.coin_head,
+            R.drawable.coin_tail
+    )
 }

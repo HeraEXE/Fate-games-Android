@@ -6,4 +6,5 @@
     <string name="coin_flip_title">Flip Coin</string>
     <string name="roll_dice_hint">Click on screen to roll the dice.</string>
     <string name="predict_day_hint">Click on screen to predict the day.</string>
+    <string name="flip_coin_hint">Click on screen to flip the coin.</string>
 </resources>
