@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.hera.fate.R
 import com.hera.fate.databinding.FragmentCoinFlipBinding
-import com.hera.fate.utils.ImageCollection
+import com.hera.fate.utils.ImageCollection.coinImages
 import kotlin.random.Random
 
 class CoinFlip : Fragment() {
@@ -43,7 +43,8 @@ class CoinFlip : Fragment() {
         binding.coinImage.setOnClickListener {
             if (binding.flipCoinHint.visibility == View.VISIBLE)
                 binding.flipCoinHint.visibility = View.GONE
-            result = ImageCollection.coinImages[Random.nextInt(ImageCollection.coinImages.size)]
+
+            result = coinImages[Random.nextInt(coinImages.size)]
             loadCoinImage()
             binding.coinImage.startAnimation(fadeIn)
         }

@@ -43,6 +43,7 @@ class DiceRoll : Fragment() {
         binding.diceImage.setOnClickListener {
             if (binding.rollDiceHint.visibility == View.VISIBLE)
                 binding.rollDiceHint.visibility = View.GONE
+
             result = diceImages[Random.nextInt(diceImages.size)]
             loadDiceImage()
             binding.diceImage.startAnimation(fadeIn)

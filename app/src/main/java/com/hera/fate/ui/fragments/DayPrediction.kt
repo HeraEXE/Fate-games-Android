@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.hera.fate.R
 import com.hera.fate.databinding.FragmentDayPredictionBinding
-import com.hera.fate.utils.ImageCollection
+import com.hera.fate.utils.ImageCollection.faceImages
 import kotlin.random.Random
 
 class DayPrediction : Fragment() {
@@ -43,7 +43,8 @@ class DayPrediction : Fragment() {
         binding.faceImage.setOnClickListener {
             if (binding.predictDayHint.visibility == View.VISIBLE)
                 binding.predictDayHint.visibility = View.GONE
-            result = ImageCollection.faceImages[Random.nextInt(ImageCollection.faceImages.size)]
+
+            result = faceImages[Random.nextInt(faceImages.size)]
             loadFaceImage()
             binding.faceImage.startAnimation(fadeIn)
         }
