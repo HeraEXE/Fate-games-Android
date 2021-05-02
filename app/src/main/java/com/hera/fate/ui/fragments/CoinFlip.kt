@@ -37,7 +37,7 @@ class CoinFlip : Fragment() {
         }
 
         // Load animations.
-        val fadeIn = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
+        val rotate = AnimationUtils.loadAnimation(activity, R.anim.rotate)
 
         // Change coin image when user clicks.
         binding.coinImage.setOnClickListener {
@@ -46,13 +46,13 @@ class CoinFlip : Fragment() {
 
             result = coinImages[Random.nextInt(coinImages.size)]
             loadCoinImage()
-            binding.coinImage.startAnimation(fadeIn)
+            binding.coinImage.startAnimation(rotate)
         }
 
         if (result != null) {
             binding.flipCoinHint.visibility = View.GONE
             loadCoinImage()
-            binding.coinImage.startAnimation(fadeIn)
+            binding.coinImage.startAnimation(rotate)
         }
 
         return binding.root

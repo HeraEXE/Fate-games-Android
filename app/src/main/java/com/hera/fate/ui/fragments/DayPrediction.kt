@@ -37,7 +37,7 @@ class DayPrediction : Fragment() {
         }
 
         // Load animations.
-        val fadeIn = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
+        val zoomIn = AnimationUtils.loadAnimation(activity, R.anim.zoom_in)
 
         // Change face image when user clicks.
         binding.faceImage.setOnClickListener {
@@ -46,13 +46,13 @@ class DayPrediction : Fragment() {
 
             result = faceImages[Random.nextInt(faceImages.size)]
             loadFaceImage()
-            binding.faceImage.startAnimation(fadeIn)
+            binding.faceImage.startAnimation(zoomIn)
         }
 
         if (result != null) {
             binding.predictDayHint.visibility = View.GONE
             loadFaceImage()
-            binding.faceImage.startAnimation(fadeIn)
+            binding.faceImage.startAnimation(zoomIn)
         }
 
         return binding.root
